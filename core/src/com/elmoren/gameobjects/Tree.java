@@ -7,12 +7,12 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Tree extends Scrollable {
 	
-	public static final int TREE_WIDTH = 24;
-	public static final int TREE_HEIGHT = 11;
-	
-	private Rectangle boundingBox;
+	public static final int TREE_WIDTH = 64;
+	public static final int TREE_HEIGHT = 128;
+
+    private Rectangle boundingBox;
     private Random r;
-    
+
     // When Tree constructor is invoked, invoke the super (Scrollable) constructor
     public Tree(float x, float y, int width, int height, float scrollSpeed) {
         super(x, y, width, height, scrollSpeed);
@@ -31,16 +31,16 @@ public class Tree extends Scrollable {
     	
         position.add(x, y);
         
-        if (position.y > 100f)
-        	reset(x, -100f);
+        if (position.y > 170f)
+        	reset(x, -300f);
                 
     }
     
     public boolean collides(Cat cat) {
     	
-    	boundingBox.x = position.x;
+    	boundingBox.x = position.x - (width / 2);
     	boundingBox.y = position.y;
-    	
+
     	return Intersector.overlaps(cat.getBoundingBox(), this.boundingBox);
     }
     
@@ -49,8 +49,8 @@ public class Tree extends Scrollable {
         // Call the reset method in the superclass (Scrollable)
         super.reset(x, y);
         
-        position.x = r.nextInt(450) - 225;
-        position.y = y - r.nextInt(200);
+        position.x = r.nextInt(1000) - 500;
+        position.y = y - r.nextInt(300);
         
         System.out.println("Reset called");
     }

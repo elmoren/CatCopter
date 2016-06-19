@@ -53,9 +53,9 @@ public class GameRenderer {
 		this.cam = new PerspectiveCamera(80, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 	    cam.rotate(180, 0, 0, 1);
-		cam.position.set(0f, 100f, -100f);
+		cam.position.set(0f, 200f, -125f);
 	    cam.near = 0.1f;
-	    cam.far = 270f;
+	    cam.far = 500f;
 	    cam.lookAt(0,0,0);
 	    cam.normalizeUp();
 	    cam.update();
@@ -102,15 +102,13 @@ public class GameRenderer {
         shapeRenderer.end();
 
         shapeRenderer.begin(ShapeType.Filled);
-        Rectangle r1 = cat.getBoundingBox();
-        shapeRenderer.setColor(0 / 255.0f, 11 / 255.0f, 187 / 255.0f, 1);
-        shapeRenderer.rect(r1.x, r1.y, r1.getWidth(), r1.getHeight());
-        shapeRenderer.end();
+		Rectangle r1 = cat.getBoundingBox();
+		shapeRenderer.setColor(0 / 255.0f, 11 / 255.0f, 187 / 255.0f, 1);
+		//shapeRenderer.rect(r1.x, r1.y, r1.getWidth(), r1.getHeight());
+		shapeRenderer.end();
 
-//        AssetLoader.catDecal.setRotation(45.0f);
-//        AssetLoader.catDecal.setRotationZ(cat.getRotation());
         AssetLoader.catDecal.setRotation(cam.direction, cam.up);
-        AssetLoader.catDecal.rotateZ(cat.getRotation() / 2.0f);
+		AssetLoader.catDecal.rotateZ(cat.getRotation() / 2.0f);
 
         AssetLoader.catDecal.setY(cat.getY());
         AssetLoader.catDecal.setZ(cat.getElevation() * -1.0f);
@@ -119,13 +117,14 @@ public class GameRenderer {
         shapeRenderer.begin(ShapeType.Filled);
         shapeRenderer.setColor(160 / 255.0f, 15 / 255.0f, 17 / 255.0f, 1);
 
-        AssetLoader.sunDecal.setPosition(50, 10, -80);
+        AssetLoader.sunDecal.setPosition(Gdx.graphics.getWidth()*0.35f, -275, -130);
+		AssetLoader.sunDecal.setScale(4);
         spriteBatch.add(AssetLoader.sunDecal);
 
         int i = 0;
         for (Scrollable s : obstacles) {
-        	shapeRenderer.rect(s.getX(), s.getY(), s.getWidth(), s.getHeight() );
-        	AssetLoader.treeDecals[i].setPosition(s.getX(), s.getY(), 2f);
+        	//shapeRenderer.rect(s.getX() - (s.getWidth()/2), s.getY(), s.getWidth(), s.getHeight() );
+        	AssetLoader.treeDecals[i].setPosition(s.getX(), s.getY(), 0.0f);
             spriteBatch.add(AssetLoader.treeDecals[i]);
             i++;
         }
@@ -138,6 +137,11 @@ public class GameRenderer {
         Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
         batcher.setProjectionMatrix(normalProjection);
         batcher.begin();
+//		batcher.draw(AssetLoader.sun,
+//				(Gdx.graphics.getWidth() * 0.75f),
+//				(Gdx.graphics.getHeight() * 0.75f),
+//				AssetLoader.sun.getRegionWidth() * 2,
+//				AssetLoader.sun.getRegionHeight() * 2 );
         if (world.isReady()) {
         	AssetLoader.shadow.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2 + 1);
             AssetLoader.font.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2);

@@ -50,7 +50,7 @@ public class AssetLoader {
         sun = new TextureRegion(sunTexture, 0, 0, 25, 25);
         sun.flip(false, true);
 
-        tree = new TextureRegion(treeTexture, 2, 2, 12, 25);
+        tree = new TextureRegion(treeTexture);
         tree.flip(false, true);
 
         bg = new TextureRegion(texture, 0, 0, 136, 43);
@@ -60,7 +60,7 @@ public class AssetLoader {
         grass.flip(false, true);
 
         cat =  new TextureRegion(catTexture);
-        cat.flip(false, false);
+        cat.flip(true, false);
 
         sunDecal = Decal.newDecal(sun, true);
         bgDecal = Decal.newDecal(bg, false);

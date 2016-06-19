@@ -40,7 +40,7 @@ public class Cat {
         this.maxElevation = elevation + HOVER_DELTA;
         this.minElevation = elevation - HOVER_DELTA;
         this.hoverDirection = 1.0f;        
-        boundingBox = new Rectangle(x, y, this.width, this.height);
+        boundingBox = new Rectangle(x - (width/2), y, this.width, this.height);
         isAlive = true;
     }
 	

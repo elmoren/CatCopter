@@ -23,10 +23,7 @@ public class Scrollable {
     	velocity = 0;
     }
     
-    public void update(float delta) {    
-    	
- //   	position.add(0, velocity * delta);
-    	
+    public void update(float delta) {
     	if (position.y + width < 0) {
             isScrolledLeft = true;
         }

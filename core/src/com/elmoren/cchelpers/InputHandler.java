@@ -87,4 +87,8 @@ public class InputHandler implements InputProcessor {
     public boolean isTouchedDown() {
         return isTouchedDown;
     }
+
+    public void setMidpointX(int midpointX) {
+        this.midPointX = midpointX;
+    }
 }

@@ -24,8 +24,8 @@ public class GameWorld {
     }
     
 	public GameWorld(int width, int height)	{
-        this.cat = new Cat(-8, 65, 17, 12, 12f);
-        this.ground = new Rectangle(width * -1.5f, height * -0.5f, width*3, height*2);        
+        this.cat = new Cat(0, 150, 17, 12, 45f);
+        this.ground = new Rectangle(width * -1.5f, height * -0.5f, width*3, height*2);
         this.score = 0;
         this.scrollController = new ScrollableController(this);	        
         currentState = GameState.READY;
@@ -117,8 +117,8 @@ public class GameWorld {
     
     public void start() {
         for (int i = 0; i < this.WORLD_MAX_OBSTACLES; i++) {
-			scrollController.add(new Tree(0f, 100f, 20, 10, 3f));
-		}
+			scrollController.add(new Tree(0f, 1000f, Tree.TREE_WIDTH, 20, 6f));
+    }
         currentState = GameState.RUNNING;
     }
 

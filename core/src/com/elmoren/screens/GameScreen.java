@@ -10,7 +10,7 @@ public class GameScreen implements Screen {
 
 	private GameWorld world;
 	private GameRenderer renderer;
-	
+	private InputHandler inputHandler;
 	public GameScreen() {
 
         float screenWidth = Gdx.graphics.getWidth();
@@ -23,8 +23,9 @@ public class GameScreen implements Screen {
         
         world = new GameWorld((int) gameWidth, (int) gameHeight);
         renderer = new GameRenderer(world, (int) gameWidth, (int) gameHeight, midPointY);
-		
-        Gdx.input.setInputProcessor(new InputHandler(world, (int) midPointX));
+
+		inputHandler = new InputHandler(world, (int) midPointX);
+        Gdx.input.setInputProcessor(inputHandler);
 	}
 	
 	@Override
@@ -37,9 +38,11 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		
+        int midPointX = (int) (Gdx.graphics.getWidth() / 2);
+        inputHandler.setMidpointX(midPointX);
+
 		System.out.println("Resize called");
-		
+		// Reset the midpoint for the input handling.
 	}
 
 	@Override
