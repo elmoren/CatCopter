@@ -2,6 +2,7 @@ package com.elmoren.gameworld;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.elmoren.cchelpers.AssetLoader;
 import com.elmoren.gameobjects.Cat;
@@ -11,26 +12,36 @@ import com.elmoren.gameobjects.Tree;
 
 public class GameWorld {
 
-    public static final int WORLD_MAX_OBSTACLES = 10;
+    public static final int WORLD_START_OBSTACLES = 10;
+    public static final int WORLD_MAX_OBSTACLES = 20;
 
 	private Cat cat;
 	private Rectangle ground;
+    private Color groundColor;
+    private Color skyColor;
 	private ScrollableController scrollController;
+
+    private float gameSpeed;
     private int score;
-    
+    private int nextLevel;
+
     private GameState currentState;
     public enum GameState {
     	READY, RUNNING, GAMEOVER, HIGHSCORE
     }
     
 	public GameWorld(int width, int height)	{
-        this.cat = new Cat(0, 150, 17, 12, 45f);
+        this.cat = new Cat(0, 325, 17, 12, 45f);
         this.ground = new Rectangle(width * -1.5f, height * -0.5f, width*3, height*2);
         this.score = 0;
-        this.scrollController = new ScrollableController(this);	        
+        this.scrollController = new ScrollableController(this);
         currentState = GameState.READY;
+        groundColor = new Color(Color.GREEN);
+        skyColor = new Color( 135 / 255.0f, 206 / 255.0f, 235 / 255.0f, 1 ); // Sky Blue
+        gameSpeed = 7.0f;
+        nextLevel = 500;
 	}
-	
+
 	public void update(float delta) {	
 		
         switch (currentState) {
@@ -69,7 +80,16 @@ public class GameWorld {
 		
 		cat.update(delta);
 		scrollController.setDirection(cat.getRotation());
-		scrollController.update(delta);			
+		scrollController.update(delta);
+
+        // Add difficulty after score acheived.
+        if (score >= nextLevel) {
+            if (scrollController.size() < WORLD_MAX_OBSTACLES) {
+                scrollController.add(new Tree(0f, 1000f, Tree.TREE_WIDTH, 20, gameSpeed));
+            }
+            nextLevel += 250;
+        }
+
 
 		if (scrollController.collides(cat) && cat.isAlive()) {
 			scrollController.stop();
@@ -80,7 +100,6 @@ public class GameWorld {
                 AssetLoader.setHighScore(score);
                 currentState = GameState.HIGHSCORE;
             }
-			
 		}
 		else {
 			this.score += 1;
@@ -116,15 +135,16 @@ public class GameWorld {
     }
     
     public void start() {
-        for (int i = 0; i < this.WORLD_MAX_OBSTACLES; i++) {
-			scrollController.add(new Tree(0f, 1000f, Tree.TREE_WIDTH, 20, 6f));
-    }
+        for (int i = 0; i < this.WORLD_START_OBSTACLES; i++) {
+			scrollController.add(new Tree(0f, 1000f, Tree.TREE_WIDTH, 20, gameSpeed));
+        }
         currentState = GameState.RUNNING;
     }
 
 	public void restart() {
 		cat.restart();		
 		score = 0;
+        nextLevel = 750;
 		scrollController.restart();
 		currentState = GameState.READY;
 	}
@@ -132,4 +152,12 @@ public class GameWorld {
 	public int getScore() {
 		return score;
 	}
+
+    public Color getGroundColor() {
+        return groundColor;
+    }
+
+    public Color getSkyColor() {
+        return skyColor;
+    }
 }

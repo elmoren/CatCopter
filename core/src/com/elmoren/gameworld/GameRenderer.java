@@ -27,12 +27,12 @@ import com.elmoren.gameobjects.Tree;
 public class GameRenderer {
 
 	private GameWorld world;
-	private PerspectiveCamera cam;
-	private ShapeRenderer shapeRenderer;
+    private PerspectiveCamera cam;
+    private ShapeRenderer shapeRenderer;
 
-	private CameraGroupStrategy groupStrategy;
-	private DecalBatch spriteBatch;
-	private SpriteBatch batcher;
+    private CameraGroupStrategy groupStrategy;
+    private DecalBatch spriteBatch;
+    private SpriteBatch batcher;
 
     private int midPointY;
     private int gameHeight;
@@ -53,9 +53,9 @@ public class GameRenderer {
 		this.cam = new PerspectiveCamera(80, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 	    cam.rotate(180, 0, 0, 1);
-		cam.position.set(0f, 200f, -125f);
+		cam.position.set(0f, 400f, -100f);
 	    cam.near = 0.1f;
-	    cam.far = 500f;
+	    cam.far = 800f;
 	    cam.lookAt(0,0,0);
 	    cam.normalizeUp();
 	    cam.update();
@@ -83,8 +83,10 @@ public class GameRenderer {
 
 		Cat cat = world.getCat();
 
-        Gdx.gl.glClearColor( 135 / 255.0f, 206 / 255.0f, 235 / 255.0f, 1);
-        // Clear the Depth bit so that decals will display on 3d World
+        Gdx.gl.glClearColor(world.getSkyColor().r,
+                world.getSkyColor().g,
+                world.getSkyColor().b,
+                world.getSkyColor().a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         this.cam.rotate((lastRotation - cat.getRotation()) / 3.0f, 0, 1, 0);
@@ -103,7 +105,7 @@ public class GameRenderer {
 
         shapeRenderer.begin(ShapeType.Filled);
 		Rectangle r1 = cat.getBoundingBox();
-		shapeRenderer.setColor(0 / 255.0f, 11 / 255.0f, 187 / 255.0f, 1);
+		shapeRenderer.setColor(world.getGroundColor());
 		//shapeRenderer.rect(r1.x, r1.y, r1.getWidth(), r1.getHeight());
 		shapeRenderer.end();
 
@@ -117,14 +119,14 @@ public class GameRenderer {
         shapeRenderer.begin(ShapeType.Filled);
         shapeRenderer.setColor(160 / 255.0f, 15 / 255.0f, 17 / 255.0f, 1);
 
-        AssetLoader.sunDecal.setPosition(Gdx.graphics.getWidth()*0.35f, -275, -130);
-		AssetLoader.sunDecal.setScale(4);
+        AssetLoader.sunDecal.setPosition(Gdx.graphics.getWidth()*0.7f, -275, -230);
+		AssetLoader.sunDecal.setScale(8);
         spriteBatch.add(AssetLoader.sunDecal);
 
         int i = 0;
         for (Scrollable s : obstacles) {
         	//shapeRenderer.rect(s.getX() - (s.getWidth()/2), s.getY(), s.getWidth(), s.getHeight() );
-        	AssetLoader.treeDecals[i].setPosition(s.getX(), s.getY(), 0.0f);
+        	AssetLoader.treeDecals[i].setPosition(s.getX(), s.getY(), -1f);
             spriteBatch.add(AssetLoader.treeDecals[i]);
             i++;
         }

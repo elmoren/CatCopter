@@ -68,12 +68,12 @@ public class AssetLoader {
         bgDecal.rotateX(52.5f);
         bgDecal.setPosition(0, -200, 0);
 
-        sunDecal.rotateX(45);
+        sunDecal.rotateX(55);
 
         treeDecals = new Decal[GameWorld.WORLD_MAX_OBSTACLES];
         for (int i = 0; i < GameWorld.WORLD_MAX_OBSTACLES; i++) {
             treeDecals[i] = Decal.newDecal(tree, true);
-            treeDecals[i].rotateX(45);
+            treeDecals[i].rotateX(65);
         }
 
 //        dead = Gdx.audio.newSound(Gdx.files.internal("data/dead.wav"));

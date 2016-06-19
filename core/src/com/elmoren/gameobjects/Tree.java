@@ -31,7 +31,7 @@ public class Tree extends Scrollable {
     	
         position.add(x, y);
         
-        if (position.y > 170f)
+        if (position.y > 375f)
         	reset(x, -300f);
                 
     }

@@ -13,24 +13,24 @@ public class ScrollableController {
 	private ArrayList<Tree> obstacles;
 	private float direction;
 	Random r;
-	
+
 	public ScrollableController(GameWorld world) {
 		r = new Random();
 		this.world = world;
-		this.obstacles = new ArrayList<Tree>();		
+		this.obstacles = new ArrayList<Tree>();
 	}
 
 	public void add(Tree s) {
 		obstacles.add(s);
 	}
-	
+
 	public void update(float delta) {
 
 		for (Scrollable s: obstacles) {
 			s.setAngle(direction);
 			s.update(delta);
 		}
-				
+
 	}
 	
 	public boolean collides(Cat cat) {
@@ -60,5 +60,8 @@ public class ScrollableController {
 	public void restart() {
 		obstacles.clear();		
 	}
-	
+
+	public int size() {
+		return obstacles.size();
+	}
 }
