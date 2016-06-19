@@ -38,7 +38,7 @@ public class GameWorld {
         currentState = GameState.READY;
         groundColor = new Color(Color.GREEN);
         skyColor = new Color( 135 / 255.0f, 206 / 255.0f, 235 / 255.0f, 1 ); // Sky Blue
-        gameSpeed = 7.0f;
+        gameSpeed = 7.5f;
         nextLevel = 500;
 	}
 

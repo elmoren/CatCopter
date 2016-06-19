@@ -11,8 +11,8 @@ public class Cat {
 	
 	private final float MAX_LEFT  = -45.0f;
 	private final float MAX_RIGHT =  45.0f;
-	private final float TURN_RATE =   3.75f;
-	private final float HOVER_DELTA = 1.5f;
+	private final float TURN_RATE =   4.5f;
+	private final float HOVER_DELTA = 1.7f;
 	private final float HOVER_RATE = 0.05f;
 	
 	private Vector2 position;

@@ -28,12 +28,12 @@ public class Tree extends Scrollable {
 
         float x = -1f * (float) (velocity * Math.sin(Math.toRadians(angle)));
         float y = (float) (velocity * Math.cos(Math.toRadians(angle)));
-    	
+
         position.add(x, y);
-        
+
         if (position.y > 375f)
-        	reset(x, -300f);
-                
+        	reset(x, -350f);
+
     }
     
     public boolean collides(Cat cat) {
@@ -49,8 +49,8 @@ public class Tree extends Scrollable {
         // Call the reset method in the superclass (Scrollable)
         super.reset(x, y);
         
-        position.x = r.nextInt(1000) - 500;
-        position.y = y - r.nextInt(300);
+        position.x = r.nextInt(1200) - 600;
+        position.y = y - r.nextInt(500);
         
         System.out.println("Reset called");
     }

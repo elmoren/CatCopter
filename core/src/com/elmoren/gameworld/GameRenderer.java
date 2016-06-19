@@ -3,6 +3,7 @@ package com.elmoren.gameworld;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -109,11 +110,17 @@ public class GameRenderer {
 		//shapeRenderer.rect(r1.x, r1.y, r1.getWidth(), r1.getHeight());
 		shapeRenderer.end();
 
+        // Set Cat Rotation and Eleveation
         AssetLoader.catDecal.setRotation(cam.direction, cam.up);
 		AssetLoader.catDecal.rotateZ(cat.getRotation() / 2.0f);
-
         AssetLoader.catDecal.setY(cat.getY());
-        AssetLoader.catDecal.setZ(cat.getElevation() * -1.0f);
+        if (!cat.isAlive() && AssetLoader.catDecal.getZ() < 50f) {
+            // Make CatCoptor Fall if dead
+            AssetLoader.catDecal.setZ(AssetLoader.catDecal.getZ() + 7.5f);
+        }
+        else if (cat.isAlive()) {
+            AssetLoader.catDecal.setZ(cat.getElevation() * -1.0f);
+        }
         spriteBatch.add(AssetLoader.catDecal);
 
         shapeRenderer.begin(ShapeType.Filled);
@@ -132,23 +139,23 @@ public class GameRenderer {
         }
 
         spriteBatch.flush();
-        shapeRenderer.end();
-        String score = world.getScore() + "";
+            shapeRenderer.end();
+            String score = world.getScore() + "";
 
-        // Change Text shown based on game state!
-        Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
-        batcher.setProjectionMatrix(normalProjection);
-        batcher.begin();
+            // Change Text shown based on game state!
+            Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
+            batcher.setProjectionMatrix(normalProjection);
+            batcher.begin();
 //		batcher.draw(AssetLoader.sun,
 //				(Gdx.graphics.getWidth() * 0.75f),
 //				(Gdx.graphics.getHeight() * 0.75f),
 //				AssetLoader.sun.getRegionWidth() * 2,
 //				AssetLoader.sun.getRegionHeight() * 2 );
-        if (world.isReady()) {
-        	AssetLoader.shadow.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2 + 1);
-            AssetLoader.font.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2);
-        }
-        else {
+            if (world.isReady()) {
+                AssetLoader.shadow.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2 + 1);
+                AssetLoader.font.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2);
+            }
+            else {
 
         	if (world.isGameOver() || world.isHighScore()) {
 
