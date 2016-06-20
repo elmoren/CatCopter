@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy;
 import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
@@ -111,14 +112,19 @@ public class GameRenderer {
 		shapeRenderer.end();
 
         // Set Cat Rotation and Eleveation
-        AssetLoader.catDecal.setRotation(cam.direction, cam.up);
-		AssetLoader.catDecal.rotateZ(cat.getRotation() / 2.0f);
-        AssetLoader.catDecal.setY(cat.getY());
+        // Cat animation time
+        AssetLoader.stateTime += Gdx.graphics.getDeltaTime();
+
         if (!cat.isAlive() && AssetLoader.catDecal.getZ() < 50f) {
             // Make CatCoptor Fall if dead
             AssetLoader.catDecal.setZ(AssetLoader.catDecal.getZ() + 7.5f);
         }
         else if (cat.isAlive()) {
+            TextureRegion currentFrame = AssetLoader.catAnimation.getKeyFrame(AssetLoader.stateTime, true);
+            AssetLoader.catDecal = Decal.newDecal(currentFrame, true);
+            AssetLoader.catDecal.setRotation(cam.direction, cam.up);
+            AssetLoader.catDecal.rotateZ(cat.getRotation() / 2.0f);
+            AssetLoader.catDecal.setY(cat.getY());
             AssetLoader.catDecal.setZ(cat.getElevation() * -1.0f);
         }
         spriteBatch.add(AssetLoader.catDecal);

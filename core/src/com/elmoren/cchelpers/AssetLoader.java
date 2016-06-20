@@ -8,6 +8,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.decals.Decal;
@@ -22,6 +23,7 @@ public class AssetLoader {
     public static TextureRegion bg, grass;
 
     public static TextureRegion tree, sun, cat;
+    public static TextureRegion catFrames[];
     public static Sound dead, flap, coin;
     public static BitmapFont font, shadow;
     public static Preferences prefs;
@@ -31,6 +33,8 @@ public class AssetLoader {
     public static Decal treeDecals[];
     public static Decal sunDecal;
 
+    public static Animation catAnimation;
+    public static float stateTime;
     public static void load() {
 
         font = new BitmapFont(Gdx.files.internal("data/text.fnt"));
@@ -61,6 +65,13 @@ public class AssetLoader {
 
         cat =  new TextureRegion(catTexture);
         cat.flip(true, false);
+        TextureRegion[][] tmp = TextureRegion.split(catTexture, catTexture.getWidth()/4, catTexture.getHeight());
+        catFrames = new TextureRegion[4];
+        for (int i = 0; i < 4; i++) {
+            catFrames[i] = tmp[0][i];
+        }
+        catAnimation = new Animation(0.05f, catFrames);
+        stateTime = 0f;
 
         sunDecal = Decal.newDecal(sun, true);
         bgDecal = Decal.newDecal(bg, false);

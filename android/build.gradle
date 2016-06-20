@@ -1,6 +1,7 @@
 android {
     buildToolsVersion "23.0.3"
     compileSdkVersion 23
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -18,6 +19,11 @@ android {
         applicationId "com.elmoren.catcoptor"
         minSdkVersion 8
         targetSdkVersion 23
+    }
+    buildTypes {
+        debug {
+            debuggable true
+        }
     }
 }
 
