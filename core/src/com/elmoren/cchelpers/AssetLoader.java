@@ -20,10 +20,10 @@ public class AssetLoader {
     public static Texture texture;
     public static Texture catTexture;
     public static Texture treeTexture;
-    public static Texture sunTexture;
+//    public static Texture sunTexture;
     public static TextureRegion bg, grass;
 
-    public static TextureRegion tree, sun, cat;
+    public static TextureRegion tree, cat;
     public static TextureRegion catFrames[];
     public static Sound dead, flap, coin;
     public static BitmapFont font, shadow;
@@ -33,7 +33,7 @@ public class AssetLoader {
     public static Decal bgDecal;
     public static Decal catDecal;
     public static Decal treeDecals[];
-    public static Decal sunDecal;
+//    public static Decal sunDecal;
 
     public static Animation catAnimation;
     public static float stateTime;
@@ -47,13 +47,13 @@ public class AssetLoader {
         texture = new Texture(Gdx.files.internal("data/texture.png"));
         catTexture = new Texture(Gdx.files.internal("data/cat.png"));
         treeTexture = new Texture(Gdx.files.internal("data/Tree.png"));
-        sunTexture = new Texture(Gdx.files.internal("data/textures.png"));
+//        sunTexture = new Texture(Gdx.files.internal("data/textures.png"));
 
         texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-        sunTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+//        sunTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 
-        sun = new TextureRegion(sunTexture, 0, 0, 25, 25);
-        sun.flip(false, true);
+//        sun = new TextureRegion(sunTexture, 0, 0, 25, 25);
+//        sun.flip(false, true);
 
         tree = new TextureRegion(treeTexture);
         tree.flip(false, true);
@@ -74,13 +74,13 @@ public class AssetLoader {
         catAnimation = new Animation(0.05f, catFrames);
         stateTime = 0f;
 
-        sunDecal = Decal.newDecal(sun, true);
+//        sunDecal = Decal.newDecal(sun, true);
         bgDecal = Decal.newDecal(bg, false);
         catDecal = Decal.newDecal(cat, true);
         bgDecal.rotateX(52.5f);
         bgDecal.setPosition(0, -200, 0);
 
-        sunDecal.rotateX(55);
+//        sunDecal.rotateX(55);
 
         treeDecals = new Decal[GameWorld.WORLD_MAX_OBSTACLES];
         for (int i = 0; i < GameWorld.WORLD_MAX_OBSTACLES; i++) {
