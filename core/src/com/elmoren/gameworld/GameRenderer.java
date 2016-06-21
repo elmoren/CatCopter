@@ -134,9 +134,10 @@ public class GameRenderer {
         shapeRenderer.begin(ShapeType.Filled);
         shapeRenderer.setColor(160 / 255.0f, 15 / 255.0f, 17 / 255.0f, 1);
 
-        AssetLoader.sunDecal.setPosition(Gdx.graphics.getWidth()*0.7f, -275, -230);
-		AssetLoader.sunDecal.setScale(8);
-        spriteBatch.add(AssetLoader.sunDecal);
+        // TODO: 6/21/2016 Add the sun and sky sprites later
+        // AssetLoader.sunDecal.setPosition(Gdx.graphics.getWidth()*0.7f, -275, -230);
+		// AssetLoader.sunDecal.setScale(8);
+        // spriteBatch.add(AssetLoader.sunDecal);
 
         int i = 0;
         for (Scrollable s : obstacles) {
@@ -154,11 +155,7 @@ public class GameRenderer {
         Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
         batcher.setProjectionMatrix(normalProjection);
         batcher.begin();
-        //		batcher.draw(AssetLoader.sun,
-        //				(Gdx.graphics.getWidth() * 0.75f),
-        //				(Gdx.graphics.getHeight() * 0.75f),
-        //				AssetLoader.sun.getRegionWidth() * 2,
-        //				AssetLoader.sun.getRegionHeight() * 2 );
+
         if (world.isReady()) {
             AssetLoader.glyphLayout.setText(AssetLoader.font, "Touch to Start");
             wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;

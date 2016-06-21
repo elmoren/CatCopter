@@ -12,7 +12,6 @@ public class CCGame extends Game {
 
     @Override
     public void create() {
-        System.out.println("CC Game Created");
         AssetLoader.load();
         setScreen(new GameScreen());
     }

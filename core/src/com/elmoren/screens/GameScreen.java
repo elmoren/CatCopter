@@ -45,24 +45,21 @@ public class GameScreen implements Screen {
 	public void resize(int width, int height) {
         int midPointX = (int) (Gdx.graphics.getWidth() / 2);
         inputHandler.setMidpointX(midPointX);
-
-		System.out.println("Resize called");
-		// Reset the midpoint for the input handling.
 	}
 
 	@Override
 	public void show() {
-		System.out.println("Show called");
+
 	}
 
 	@Override
 	public void hide() {
-		System.out.println("Hide called");
+
 	}
 
 	@Override
 	public void pause() {
-		System.out.println("Pause called");
+
 	}
 
 	@Override
