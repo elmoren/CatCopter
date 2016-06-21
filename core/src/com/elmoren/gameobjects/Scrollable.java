@@ -10,7 +10,8 @@ public class Scrollable {
     protected int height;
     protected boolean isScrolledLeft;
     protected float angle;
-    
+    protected float spawnRange;
+
     public Scrollable(float x, float y, int width, int height, float scrollSpeed) {
         position = new Vector2(x, y);
         this.velocity = scrollSpeed;
@@ -23,10 +24,11 @@ public class Scrollable {
     	velocity = 0;
     }
     
-    public void update(float delta) {
+    public void update(float delta, float spawnRange) {
     	if (position.y + width < 0) {
             isScrolledLeft = true;
         }
+        this.spawnRange = spawnRange;
     }
 
     public void reset(float x, float y) {

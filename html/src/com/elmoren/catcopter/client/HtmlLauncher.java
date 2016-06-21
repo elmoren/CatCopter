@@ -1,9 +1,8 @@
-package com.elmoren.catcoptor.client;
+package com.elmoren.catcopter.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.elmoren.catcoptor.CCGame;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -14,6 +13,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new CCGame();
+                return new com.elmoren.catcopter.CCGame();
         }
 }

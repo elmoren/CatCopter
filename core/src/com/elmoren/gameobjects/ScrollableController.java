@@ -25,12 +25,10 @@ public class ScrollableController {
 	}
 
 	public void update(float delta) {
-
 		for (Scrollable s: obstacles) {
 			s.setAngle(direction);
-			s.update(delta);
+			s.update(delta, world.getGround().getWidth());
 		}
-
 	}
 	
 	public boolean collides(Cat cat) {

@@ -1,17 +1,16 @@
-package com.elmoren.catcoptor;
+package com.elmoren.catcopter;
 
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
-import com.elmoren.catcoptor.CCGame;
 
 public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new CCGame(), config);
+        return new IOSApplication(new com.elmoren.catcopter.CCGame(), config);
     }
 
     public static void main(String[] argv) {

@@ -1,4 +1,4 @@
-package com.elmoren.catcoptor;
+package com.elmoren.catcopter;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;

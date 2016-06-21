@@ -1,12 +1,11 @@
-package com.elmoren.catcoptor.desktop;
+package com.elmoren.catcopter.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.elmoren.catcoptor.CCGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new CCGame(), config);
+		new LwjglApplication(new com.elmoren.catcopter.CCGame(), config);
 	}
 }

@@ -9,16 +9,16 @@ public class Cat {
 	public static final int STRAIGHT  =  0;
 	public static final int RIGHT     =  1;
 	
-	private final float MAX_LEFT  = -45.0f;
-	private final float MAX_RIGHT =  45.0f;
-	private final float TURN_RATE =   4.5f;
+	private final float MAX_LEFT  = -40.0f;
+	private final float MAX_RIGHT =  40.0f;
+	private final float TURN_RATE =   5f;
 	private final float HOVER_DELTA = 1.7f;
 	private final float HOVER_RATE = 0.05f;
 	
 	private Vector2 position;
 	private int direction;
 	
-	private float rotation; // For handling bird rotation
+	private float rotation;
 	private int width;
 	private int height;
 	private float elevation;

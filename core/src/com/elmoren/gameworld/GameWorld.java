@@ -12,8 +12,8 @@ import com.elmoren.gameobjects.Tree;
 
 public class GameWorld {
 
-    public static final int WORLD_START_OBSTACLES = 10;
-    public static final int WORLD_MAX_OBSTACLES = 20;
+    public static final int WORLD_START_OBSTACLES = 20;
+    public static final int WORLD_MAX_OBSTACLES = 60;
 
 	private Cat cat;
 	private Rectangle ground;
@@ -38,7 +38,7 @@ public class GameWorld {
         currentState = GameState.READY;
         groundColor = new Color(Color.GREEN);
         skyColor = new Color( 135 / 255.0f, 206 / 255.0f, 235 / 255.0f, 1 ); // Sky Blue
-        gameSpeed = 7.5f;
+        gameSpeed = 12f;
         nextLevel = 500;
 	}
 
@@ -89,7 +89,6 @@ public class GameWorld {
             }
             nextLevel += 250;
         }
-
 
 		if (scrollController.collides(cat) && cat.isAlive()) {
 			scrollController.stop();
@@ -142,7 +141,7 @@ public class GameWorld {
     }
 
 	public void restart() {
-		cat.restart();		
+		cat.restart();
 		score = 0;
         nextLevel = 750;
 		scrollController.restart();
@@ -160,4 +159,5 @@ public class GameWorld {
     public Color getSkyColor() {
         return skyColor;
     }
+
 }

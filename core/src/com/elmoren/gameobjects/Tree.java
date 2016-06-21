@@ -22,17 +22,15 @@ public class Tree extends Scrollable {
     }
 
     @Override
-    public void update(float delta) {
-
-        super.update(delta);
+    public void update(float delta, float spawnRangeX) {
+        super.update(delta, spawnRangeX);
 
         float x = -1f * (float) (velocity * Math.sin(Math.toRadians(angle)));
         float y = (float) (velocity * Math.cos(Math.toRadians(angle)));
 
         position.add(x, y);
-
         if (position.y > 375f)
-        	reset(x, -350f);
+        	reset(x, -375f, spawnRangeX);
 
     }
     
@@ -43,14 +41,13 @@ public class Tree extends Scrollable {
 
     	return Intersector.overlaps(cat.getBoundingBox(), this.boundingBox);
     }
-    
-    @Override
-    public void reset(float x, float y) {
+
+    public void reset(float x, float y, float gameWidth) {
         // Call the reset method in the superclass (Scrollable)
         super.reset(x, y);
 
         // Subtract half of the random to make the spawn range even.
-        position.x = r.nextInt(1200) - 600;
+        position.x = r.nextInt((int)gameWidth) - gameWidth / 2;
         position.y = y - r.nextInt(500);
     }
     
