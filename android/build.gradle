@@ -17,13 +17,16 @@ android {
     }
     defaultConfig {
         applicationId "com.elmoren.catcoptor"
-        minSdkVersion 8
+        minSdkVersion 16
         targetSdkVersion 23
     }
     buildTypes {
         debug {
             debuggable true
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
     }
 }
 
