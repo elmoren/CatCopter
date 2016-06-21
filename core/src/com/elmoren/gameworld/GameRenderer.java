@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -82,7 +83,8 @@ public class GameRenderer {
 	}
 
 	public void render(float runTime) {
-
+        float wOffset;
+        float vOffset;
 		Cat cat = world.getCat();
 
         Gdx.gl.glClearColor(world.getSkyColor().r,
@@ -145,65 +147,72 @@ public class GameRenderer {
         }
 
         spriteBatch.flush();
-            shapeRenderer.end();
-            String score = world.getScore() + "";
+        shapeRenderer.end();
+        String score = world.getScore() + "";
 
-            // Change Text shown based on game state!
-            Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
-            batcher.setProjectionMatrix(normalProjection);
-            batcher.begin();
-//		batcher.draw(AssetLoader.sun,
-//				(Gdx.graphics.getWidth() * 0.75f),
-//				(Gdx.graphics.getHeight() * 0.75f),
-//				AssetLoader.sun.getRegionWidth() * 2,
-//				AssetLoader.sun.getRegionHeight() * 2 );
-            if (world.isReady()) {
-                AssetLoader.shadow.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2 + 1);
-                AssetLoader.font.draw(batcher, "Touch to Start", (Gdx.graphics.getWidth() / 2) - 125, Gdx.graphics.getHeight() / 2);
-            }
-            else {
+                    // Change Text shown based on game state!
+        Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
+        batcher.setProjectionMatrix(normalProjection);
+        batcher.begin();
+        //		batcher.draw(AssetLoader.sun,
+        //				(Gdx.graphics.getWidth() * 0.75f),
+        //				(Gdx.graphics.getHeight() * 0.75f),
+        //				AssetLoader.sun.getRegionWidth() * 2,
+        //				AssetLoader.sun.getRegionHeight() * 2 );
+        if (world.isReady()) {
+            AssetLoader.glyphLayout.setText(AssetLoader.font, "Touch to Start");
+            wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;
+            vOffset =  Gdx.graphics.getHeight() / 2 + AssetLoader.glyphLayout.height / 2;
+            AssetLoader.shadow.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset - 1);
+            AssetLoader.font.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset);
+        }
+        else {
 
-        	if (world.isGameOver() || world.isHighScore()) {
+            if (world.isGameOver() || world.isHighScore()) {
 
-        		if (world.isGameOver()) {
-        			AssetLoader.shadow.draw(batcher, "Game Over", (Gdx.graphics.getWidth() / 2) - 90,
-        					Gdx.graphics.getHeight() / 2 + 66);
-        			AssetLoader.font.draw(batcher, "Game Over", (Gdx.graphics.getWidth() / 2) - 90,
-        					Gdx.graphics.getHeight() / 2 + 65);
+                if (world.isGameOver()) {
+                    AssetLoader.glyphLayout.setText(AssetLoader.font, "Game Over");
+                    wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;
+                    vOffset = (Gdx.graphics.getHeight() / 5)*4; // - (AssetLoader.glyphLayout.height / 2);
+                    AssetLoader.shadow.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset-1);
+                    AssetLoader.font.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset);
 
-        			AssetLoader.shadow.draw(batcher, "High Score:", (Gdx.graphics.getWidth() / 2) - 90,
-        					Gdx.graphics.getHeight() / 2 + 16);
-        			AssetLoader.font.draw(batcher, "High Score:", (Gdx.graphics.getWidth() / 2) - 90,
-        					Gdx.graphics.getHeight() / 2 + 15);
+                    AssetLoader.glyphLayout.setText(AssetLoader.font, "High Score:");
+                    wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;
+                    vOffset = vOffset - (Gdx.graphics.getHeight()/5);
+        			AssetLoader.shadow.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset-1);
+        			AssetLoader.font.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset);
 
         			String highScore = AssetLoader.getHighScore() + "";
-
-        			AssetLoader.shadow.draw(batcher, highScore, (Gdx.graphics.getWidth() / 2) - (10 * highScore.length()),
-        					Gdx.graphics.getHeight() / 2 - 26 );
-        	        AssetLoader.font.draw(batcher, highScore, (Gdx.graphics.getWidth() / 2) - (10 * highScore.length()),
-        	        		Gdx.graphics.getHeight() / 2 - 25 );
-
+                    AssetLoader.glyphLayout.setText(AssetLoader.font, highScore);
+                    wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;
+                    vOffset = vOffset - (Gdx.graphics.getHeight()/5);
+                    AssetLoader.shadow.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset - 1);
+        	        AssetLoader.font.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset);
         		}
         		else {
         			// High Score!
-        			AssetLoader.shadow.draw(batcher, "High Score!", (Gdx.graphics.getWidth() / 2) - 90, Gdx
-        					.graphics.getHeight() / 2 + 36);
-        			AssetLoader.font.draw(batcher, "High Score!", (Gdx.graphics.getWidth() / 2) - 90,
-        					Gdx.graphics.getHeight() / 2 + 35);
+                    AssetLoader.glyphLayout.setText(AssetLoader.font, "High Score!");
+                    wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;
+                    vOffset = Gdx.graphics.getHeight() / 2 + (AssetLoader.glyphLayout.height / 2);
+                    AssetLoader.shadow.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset-1);
+                    AssetLoader.font.draw(batcher, AssetLoader.glyphLayout, wOffset,vOffset);
         		}
 
-                AssetLoader.shadow.draw(batcher, "Try again?", (Gdx.graphics.getWidth() / 2) - 90,
-                		Gdx.graphics.getHeight() / 4 + 1);
-                AssetLoader.font.draw(batcher, "Try again?", (Gdx.graphics.getWidth() / 2) - 90,
-                		Gdx.graphics.getHeight() / 4 );
-
+                AssetLoader.glyphLayout.setText(AssetLoader.font, "Try Again?");
+                wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;
+                vOffset = Gdx.graphics.getHeight() / 5 + (AssetLoader.glyphLayout.height / 3);
+                AssetLoader.shadow.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset - 1);
+                AssetLoader.font.draw(batcher, AssetLoader.glyphLayout, wOffset, vOffset);
         	}
 
         	// Current score always visible when not in READY state
-        	AssetLoader.shadow.draw(batcher, score, (Gdx.graphics.getWidth() / 2) - (10 * score.length()),
-        			Gdx.graphics.getHeight() - 10 );
-        	AssetLoader.font.draw(batcher, score, (Gdx.graphics.getWidth() / 2) - (10 * score.length()),
-        			Gdx.graphics.getHeight() - 9);
+            AssetLoader.glyphLayout.setText(AssetLoader.font, score);
+            wOffset = (Gdx.graphics.getWidth() - AssetLoader.glyphLayout.width) / 2;
+            AssetLoader.shadow.draw(batcher, AssetLoader.glyphLayout, wOffset,
+        			Gdx.graphics.getHeight() - 11 );
+        	AssetLoader.font.draw(batcher, AssetLoader.glyphLayout, wOffset,
+        			Gdx.graphics.getHeight() - 10);
 
         }
         batcher.end();

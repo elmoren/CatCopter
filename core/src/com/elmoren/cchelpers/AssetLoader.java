@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.elmoren.gameworld.GameWorld;
@@ -26,6 +27,7 @@ public class AssetLoader {
     public static TextureRegion catFrames[];
     public static Sound dead, flap, coin;
     public static BitmapFont font, shadow;
+    public static GlyphLayout glyphLayout;
     public static Preferences prefs;
 
     public static Decal bgDecal;
@@ -37,11 +39,10 @@ public class AssetLoader {
     public static float stateTime;
     public static void load() {
 
+        // Init Font data
         font = new BitmapFont(Gdx.files.internal("data/text.fnt"));
-        font.getData().setScale(0.5f, 0.5f);
-
         shadow = new BitmapFont(Gdx.files.internal("data/shadow.fnt"));
-        shadow.getData().setScale(0.5f, 0.5f);
+        glyphLayout = new GlyphLayout();
 
         texture = new Texture(Gdx.files.internal("data/texture.png"));
         catTexture = new Texture(Gdx.files.internal("data/cat.png"));

@@ -48,11 +48,10 @@ public class Tree extends Scrollable {
     public void reset(float x, float y) {
         // Call the reset method in the superclass (Scrollable)
         super.reset(x, y);
-        
+
+        // Subtract half of the random to make the spawn range even.
         position.x = r.nextInt(1200) - 600;
         position.y = y - r.nextInt(500);
-        
-        System.out.println("Reset called");
     }
     
     public void onRestart(float x, float y, float scrollSpeed) {

@@ -2,38 +2,43 @@ package com.elmoren.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.elmoren.cchelpers.AssetLoader;
 import com.elmoren.cchelpers.InputHandler;
 import com.elmoren.gameworld.GameRenderer;
 import com.elmoren.gameworld.GameWorld;
 
 public class GameScreen implements Screen {
 
+    // Used to scale Fonts, etc when needed
+    public static final float DEFAULT_WIDTH  = 640;
+    public static final float DEFAULT_HEIGHT = 480;
+
 	private GameWorld world;
 	private GameRenderer renderer;
 	private InputHandler inputHandler;
-	public GameScreen() {
 
+	public GameScreen() {
         float screenWidth = Gdx.graphics.getWidth();
-        float screenHeight = Gdx.graphics.getHeight();      
-        float gameWidth = screenWidth;
-        float gameHeight = screenHeight;
+        float screenHeight = Gdx.graphics.getHeight();
+        float scale = screenWidth / DEFAULT_WIDTH;
+
+        int midPointY = (int) (screenHeight / 2);
+        int midPointX = (int) (screenWidth / 2);
         
-        int midPointY = (int) (gameHeight / 2);
-        int midPointX = (int) (gameWidth / 2);
-        
-        world = new GameWorld((int) gameWidth, (int) gameHeight);
-        renderer = new GameRenderer(world, (int) gameWidth, (int) gameHeight, midPointY);
+        world = new GameWorld((int) screenWidth, (int) screenHeight);
+        renderer = new GameRenderer(world, (int) screenWidth, (int) screenHeight, midPointY);
 
 		inputHandler = new InputHandler(world, (int) midPointX);
         Gdx.input.setInputProcessor(inputHandler);
+
+        AssetLoader.font.getData().setScale(scale);
+        AssetLoader.shadow.getData().setScale(scale);
 	}
 	
 	@Override
 	public void render(float delta) {
-
 		world.update(delta);
 	    renderer.render(delta);
-		
 	}
 
 	@Override
@@ -47,34 +52,26 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {
-		
 		System.out.println("Show called");
-		
 	}
 
 	@Override
 	public void hide() {
-		
 		System.out.println("Hide called");
-		
 	}
 
 	@Override
 	public void pause() {
-		
 		System.out.println("Pause called");
-		
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void dispose() {
-
 	}
 
 }
